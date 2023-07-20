@@ -3,8 +3,11 @@
 TMUX_POWERLINE_SEG_BATTERY_TYPE_DEFAULT="percentage"
 TMUX_POWERLINE_SEG_BATTERY_NUM_HEARTS_DEFAULT=5
 
-HEART_FULL="♥"
-HEART_EMPTY="♡"
+HEART_FULL="󱊣"
+HEART_MED="󱊢"
+HEART_EMPTY="󱊡"
+HEART_CHARGE="󰂄"
+ADAPTER="󰚥"
 
 generate_segmentrc() {
 	read -d '' rccontents  << EORC
@@ -23,11 +26,14 @@ run_segment() {
 	else
 		battery_status=$(__battery_linux)
 	fi
-	[ -z "$battery_status" ] && return
+	if [ -z "$battery_status" ]; then
+		echo "$ADAPTER "
+		return
+	fi
 
 	case "$TMUX_POWERLINE_SEG_BATTERY_TYPE" in
 		"percentage")
-			output="${HEART_FULL} ${battery_status}%"
+			output="${battery_status}%"
 			;;
 		"cute")
 			output=$(__cutinate $battery_status)
@@ -63,17 +69,19 @@ __battery_osx() {
           export fully_charged=$value;;
 			esac
 			if [[ -n $maxcap && -n $curcap && -n $extconnect ]]; then
-				if [[ "$curcap" == "$maxcap" || "$fully_charged" == "Yes" && $extconnect == "Yes"  ]]; then
+				if [[ "$fully_charged" == "Yes" && $extconnect == "Yes"  ]]; then
 					return
 				fi
 				charge=`pmset -g batt | grep -o "[0-9][0-9]*\%" | rev | cut -c 2- | rev`
 				if [[ "$extconnect" == "Yes" ]]; then
-					echo "$charge"
+					echo "$HEART_CHARGE $charge"
 				else
 					if [[ $charge -lt 50 ]]; then
-						echo -n "#[fg=red]"
+						echo -n "#[fg=#ff0000]"
+						echo "$HEART_EMPTY $charge"
+					else
+						echo "$HEART_MED $charge"
 					fi
-					echo "$charge"
 				fi
 				break
 			fi

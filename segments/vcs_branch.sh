@@ -5,8 +5,8 @@ source "${TMUX_POWERLINE_DIR_LIB}/tmux_adapter.sh"
 
 TMUX_POWERLINE_SEG_VCS_BRANCH_MAX_LEN_DEFAULT=24
 
-branch_symbol=""
-git_colour="5"
+branch_symbol=""
+git_colour="7"
 svn_colour="220"
 hg_colour="45"
 
@@ -106,7 +106,7 @@ __parse_hg_branch() {
 
 
 __truncate_branch_name() {
-	trunc_symbol="…"
+	trunc_symbol="󰇘"
 	branch=$(echo $1 | sed "s/\(.\{$TMUX_POWERLINE_SEG_VCS_BRANCH_MAX_LEN\}\).*/\1$trunc_symbol/")
 	echo -n $branch
 }
