@@ -79,8 +79,10 @@ __battery_osx() {
 					if [[ $charge -lt 50 ]]; then
 						echo -n "#[fg=#ff0000]"
 						echo "$BATTERY_EMPTY $charge"
-					else
+					elif [[ $charge -lt 80 ]]; then
 						echo "$BATTERY_MED $charge"
+					else
+						echo "$BATTERY_FULL $charge"
 					fi
 				fi
 				break
