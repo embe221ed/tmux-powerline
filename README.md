@@ -159,7 +159,7 @@ Also see [How to make a segment](#How-to-make-a-segment) below for more details.
 
 
 # Debugging
-Some segments might not work on your system for various reasons such as missing programs or different versions not having the same options. To find out which segment is not working it may help to enable the debug setting in `~/.tmux-powerlinerc`. However this may not be enough to determine the error so you can inspect all executed bash commands (will be a long output) by doing
+Some segments might not work on your system for various reasons such as missing programs or different versions not having the same options. To find out which segment is not working it may help to enable the debug setting in `~/.config/tmux-powerline/config.sh`. However this may not be enough to determine the error so you can inspect all executed bash commands (will be a long output) by doing
 
 ```shell
 bash -x powerline.sh (left|right)
@@ -202,6 +202,15 @@ tmux source-file ~/.tmux.conf
 If your tmux looks like [this](https://github.com/erikw/tmux-powerline/issues/125) then you may have to in iTerm uncheck [Unicode East Asian Ambiguous characters are wide] in Preferences -> Settings -> Advanced.
 
 
+### Changing the theme variables does not have effect
+After changing the theme's settings e.g.
+* `TMUX_POWERLINE_DEFAULT_*GROUND_COLOR`
+* `TMUX_POWERLINE_WINDOW_STATUS_FORMAT`
+* etc.
+
+nothing happens.
+
+This is a known issue, see #322 & #336 for details. Workaround: reload the theme change by creating a new tmux session.
 
 # Hacking
 This project can only gain positively from contributions. Fork today and make your own enhancements and segments to share back! If you'd like, add your name and E-mail to AUTHORS before making a pull request so you can get some credit for your work :-)
