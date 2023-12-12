@@ -190,6 +190,10 @@ __print_left_segment() {
 	local separator_foreground_color=$6
 	local separator_disable=$7
 
+	if [ $1 -eq 0 ] ; then
+		__print_colored_content "$TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR" "$TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR" "$content_background_color"
+	fi
+
 	__print_colored_content "$content" "$content_background_color" "$content_foreground_color"
 	if [ ! "$separator_disable" == "separator_disable" ] ; then
 		__print_colored_content "$separator" "$separator_background_color" "$separator_foreground_color"
@@ -209,6 +213,10 @@ __print_right_segment() {
 		__print_colored_content "$separator" "$separator_background_color" "$separator_foreground_color"
 	fi
 	__print_colored_content "$content" "$content_background_color" "$content_foreground_color"
+
+	if [ $1 -eq $((${#powerline_segments[@]}-1)) ] ; then
+		__print_colored_content "$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR" "$TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR" "$content_background_color"
+	fi
 }
 
 __segment_separator_is_thin() {
