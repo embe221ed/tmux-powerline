@@ -107,7 +107,7 @@ __parse_hg_branch() {
 
 __truncate_branch_name() {
 	trunc_symbol="󰇘"
-	branch=$(echo $1 | sed "s/\(.\{$TMUX_POWERLINE_SEG_VCS_BRANCH_MAX_LEN\}\).*/\1$trunc_symbol/")
+	branch=$(echo $1 | sed "s/\(.\{$TMUX_POWERLINE_SEG_VCS_BRANCH_MAX_LEN\}\).+/\1$trunc_symbol/")
 	echo -n $branch
 }
 
