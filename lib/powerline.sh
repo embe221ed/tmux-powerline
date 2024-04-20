@@ -148,11 +148,11 @@ __process_colors() {
 			powerline_segment[4]=${previous_background_color:-$TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR}
 		fi
 
-		if __segment_separator_is_thin; then
-			powerline_segment[5]=${powerline_segment[2]}
-		else
-			powerline_segment[5]=${powerline_segment[1]}
-		fi
+		# if __segment_separator_is_thin; then
+		# 	powerline_segment[5]=${powerline_segment[2]}
+		# else
+		# 	powerline_segment[5]=${powerline_segment[1]}
+		# fi
 
 		local previous_background_color=${powerline_segment[1]}
 		powerline_segment[6]=$separator_enable
