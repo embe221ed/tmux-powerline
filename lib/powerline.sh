@@ -160,15 +160,15 @@ __process_colors() {
 			fi
 		fi
 
-		# if __segment_separator_is_thin; then
-		# 	if [ "${powerline_segment[5]}" = "no_sep_fg_color" ]; then
-		# 		powerline_segment[5]=${powerline_segment[2]}
-		# 	fi
-		# else
-		# 	if [ "${powerline_segment[5]}" = "no_sep_fg_color" ]; then
-		# 		powerline_segment[5]=${powerline_segment[1]}
-		# 	fi
-		# fi
+		if __segment_separator_is_thin; then
+			if [ "${powerline_segment[5]}" = "no_sep_fg_color" ]; then
+				powerline_segment[5]=${powerline_segment[2]}
+			fi
+		else
+			if [ "${powerline_segment[5]}" = "no_sep_fg_color" ]; then
+				powerline_segment[5]=${powerline_segment[1]}
+			fi
+		fi
 
 		local previous_background_color=${powerline_segment[1]}
 		powerline_segment[7]=$separator_enable
