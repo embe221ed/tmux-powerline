@@ -6,11 +6,19 @@ TMUX_POWERLINE_SEG_BATTERY_NUM_HEARTS_DEFAULT=5
 
 HEART_FULL="♥"
 HEART_EMPTY="♡"
-BATTERY_FULL="󱊣"
-BATTERY_MED="󱊢"
-BATTERY_EMPTY="󱊡"
+BATTERY_EMPTY="󰂎"
+BATTERY_10="󰁺"
+BATTERY_20="󰁻"
+BATTERY_30="󰁼"
+BATTERY_40="󰁽"
+BATTERY_50="󰁾"
+BATTERY_60="󰁿"
+BATTERY_70="󰂀"
+BATTERY_80="󰂁"
+BATTERY_90="󰂂"
+BATTERY_FULL="󰁹"
 BATTERY_CHARGE="󰂄"
-ADAPTER="󰚥"
+ADAPTER=""
 
 generate_segmentrc() {
 	read -r -d '' rccontents <<EORC
@@ -87,11 +95,30 @@ __battery_osx() {
 				if [[ "$extconnect" == "Yes" ]]; then
 					echo "$BATTERY_CHARGE $charge"
 				else
-					if [[ $charge -lt 50 ]]; then
-						echo -n "#[fg=#ff0000]"
+					if [[ $charge -lt 10 ]]; then
+						echo -n "#[fg=#d20f39]"
 						echo "$BATTERY_EMPTY $charge"
+					elif [[ $charge -lt 20 ]]; then
+						echo -n "#[fg=#e64553]"
+						echo "$BATTERY_10 $charge"
+					elif [[ $charge -lt 30 ]]; then
+						echo -n "#[fg=#e64553]"
+						echo "$BATTERY_20 $charge"
+					elif [[ $charge -lt 40 ]]; then
+						echo -n "#[fg=#e64553]"
+						echo "$BATTERY_30 $charge"
+					elif [[ $charge -lt 50 ]]; then
+						echo "$BATTERY_40 $charge"
+					elif [[ $charge -lt 60 ]]; then
+						echo "$BATTERY_50 $charge"
+					elif [[ $charge -lt 70 ]]; then
+						echo "$BATTERY_60 $charge"
 					elif [[ $charge -lt 80 ]]; then
-						echo "$BATTERY_MED $charge"
+						echo "$BATTERY_70 $charge"
+					elif [[ $charge -lt 90 ]]; then
+						echo "$BATTERY_80 $charge"
+					elif [[ $charge -lt 100 ]]; then
+						echo "$BATTERY_90 $charge"
 					else
 						echo "$BATTERY_FULL $charge"
 					fi
